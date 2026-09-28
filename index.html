@@ -1,131 +1,881 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Strategy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTERWORLD</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #111827;
-            color: white;
-        }
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at top, #1b2920, #080b09 55%, #030504);
+    color: #e8eee9;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
 
-        .container {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-        }
+button,
+input {
+    font-family: inherit;
+}
 
-        .header {
-            text-align: center;
-            padding: 20px 0;
-        }
+.container {
+    width: 100%;
+    max-width: 520px;
+    margin: auto;
+    padding: 16px;
+}
 
-        .header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+/* HEADER */
 
-        .header p {
-            color: #9ca3af;
-            margin-top: 8px;
-        }
+.header {
+    background: rgba(12,18,14,.94);
+    border: 1px solid #35453a;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.45);
+}
 
-        .countries {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+.status {
+    display: flex;
+    justify-content: space-between;
+    color: #718078;
+    font-size: 10px;
+    margin-bottom: 14px;
+}
 
-        .country {
-            background: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 16px;
-            padding: 20px 10px;
-            text-align: center;
-            font-size: 18px;
-            cursor: pointer;
-        }
+.online {
+    color: #8eb997;
+}
 
-        .country:active {
-            transform: scale(0.96);
-        }
+.logo {
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
 
-        .flag {
-            font-size: 40px;
-            display: block;
-            margin-bottom: 8px;
-        }
+.subtitle {
+    color: #7c897f;
+    font-size: 12px;
+    margin-top: 6px;
+}
 
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #6b7280;
-            font-size: 13px;
-        }
-    </style>
+/* SEARCH */
+
+.search {
+    width: 100%;
+    padding: 14px;
+    border-radius: 13px;
+    border: 1px solid #35453a;
+    background: #101711;
+    color: white;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+.search::placeholder {
+    color: #657168;
+}
+
+/* COUNTRIES */
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.section-title h2 {
+    font-size: 17px;
+    margin: 0;
+}
+
+.section-title span {
+    color: #66746a;
+    font-size: 10px;
+}
+
+.countries {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.country {
+    background: linear-gradient(145deg,#172019,#0d130f);
+    border: 1px solid #334138;
+    border-radius: 15px;
+    padding: 14px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.country:active {
+    transform: scale(.96);
+}
+
+.country:hover {
+    border-color: #77947d;
+    transform: translateY(-2px);
+}
+
+.flag {
+    font-size: 30px;
+}
+
+.country-name {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+.country-info {
+    color: #68766d;
+    font-size: 9px;
+    margin-top: 5px;
+}
+
+/* COMMAND CENTER */
+
+#command {
+    display: none;
+}
+
+.command-header {
+    background: linear-gradient(145deg,#18231b,#0b100c);
+    border: 1px solid #3b4d40;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 14px;
+}
+
+.command-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.big-flag {
+    font-size: 48px;
+}
+
+.command-title h1 {
+    margin: 0;
+    font-size: 23px;
+}
+
+.command-title p {
+    margin: 5px 0 0;
+    color: #718078;
+    font-size: 11px;
+}
+
+.alert {
+    margin-top: 17px;
+    background: rgba(148,129,45,.12);
+    border-right: 3px solid #a89945;
+    padding: 11px;
+    font-size: 11px;
+    color: #aeb5aa;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.stat {
+    background: #101711;
+    border: 1px solid #2d392f;
+    border-radius: 13px;
+    padding: 14px;
+}
+
+.stat-label {
+    color: #68756c;
+    font-size: 10px;
+}
+
+.stat-value {
+    font-size: 18px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* MENU */
+
+.menu-title {
+    color: #77847a;
+    font-size: 11px;
+    margin: 15px 0 10px;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+}
+
+.menu-button {
+    border: 1px solid #344239;
+    background: linear-gradient(145deg,#182119,#0d130f);
+    color: white;
+    border-radius: 16px;
+    padding: 22px 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.menu-button:active {
+    transform: scale(.97);
+}
+
+.menu-icon {
+    display: block;
+    font-size: 29px;
+    margin-bottom: 8px;
+}
+
+.menu-name {
+    font-weight: bold;
+}
+
+.menu-description {
+    color: #66736a;
+    font-size: 9px;
+    margin-top: 5px;
+}
+
+/* PAGES */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.back {
+    background: transparent;
+    border: 1px solid #354239;
+    color: #9ca89f;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.82);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 390px;
+    background: #111812;
+    border: 1px solid #4b5d50;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+}
+
+.modal-flag {
+    font-size: 55px;
+}
+
+.modal-box h2 {
+    margin: 10px 0;
+}
+
+.modal-box p {
+    color: #7c887f;
+    font-size: 13px;
+}
+
+.confirm {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    background: #718e78;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.cancel {
+    width: 100%;
+    border: 1px solid #39463d;
+    border-radius: 12px;
+    padding: 12px;
+    background: transparent;
+    color: #8b988e;
+    margin-top: 8px;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
+<!-- COUNTRY SELECTION -->
+
+<div id="selection">
+
     <div class="header">
-        <h1>🌍 World Strategy</h1>
-        <p>کشور خود را انتخاب کنید</p>
-    </div>
 
-    <div class="countries">
-
-        <div class="country" onclick="selectCountry('ایران')">
-            <span class="flag">🇮🇷</span>
-            ایران
+        <div class="status">
+            <span>AFTERWORLD // COMMAND</span>
+            <span class="online">● SYSTEM ONLINE</span>
         </div>
 
-        <div class="country" onclick="selectCountry('چین')">
-            <span class="flag">🇨🇳</span>
-            چین
-        </div>
+        <div class="logo">AFTERWORLD</div>
 
-        <div class="country" onclick="selectCountry('فنلاند')">
-            <span class="flag">🇫🇮</span>
-            فنلاند
-        </div>
-
-        <div class="country" onclick="selectCountry('آلمان')">
-            <span class="flag">🇩🇪</span>
-            آلمان
-        </div>
-
-        <div class="country" onclick="selectCountry('فرانسه')">
-            <span class="flag">🇫🇷</span>
-            فرانسه
-        </div>
-
-        <div class="country" onclick="selectCountry('بریتانیا')">
-            <span class="flag">🇬🇧</span>
-            بریتانیا
+        <div class="subtitle">
+            GLOBAL STRATEGIC SIMULATION
         </div>
 
     </div>
 
-    <div class="footer">
-        نسخه آزمایشی بازی
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="🔎 جستجوی کشور..."
+        oninput="searchCountries()"
+    >
+
+    <div class="section-title">
+        <h2>انتخاب کشور</h2>
+        <span id="countryCount">کشورها</span>
+    </div>
+
+    <div class="countries" id="countries"></div>
+
+</div>
+
+
+<!-- COMMAND CENTER -->
+
+<div id="command">
+
+    <div class="command-header">
+
+        <button class="back" onclick="backToCountries()">
+            ← انتخاب کشور دیگر
+        </button>
+
+        <div class="command-title">
+
+            <div class="big-flag" id="selectedFlag">🇮🇷</div>
+
+            <div>
+                <h1 id="selectedCountry">ایران</h1>
+                <p>GLOBAL COMMAND CENTER</p>
+            </div>
+
+        </div>
+
+        <div class="alert">
+            ⚠️ سیستم فرماندهی فعال است. تصمیمات شما مسیر آینده کشور را تعیین می‌کند.
+        </div>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-label">💰 خزانه</div>
+            <div class="stat-value">10,000</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">🏭 صنعت</div>
+            <div class="stat-value">100</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">⚔️ قدرت نظامی</div>
+            <div class="stat-value">100</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">👥 جمعیت</div>
+            <div class="stat-value">—</div>
+        </div>
+
+    </div>
+
+
+    <div class="menu-title">
+        COMMAND MENU
+    </div>
+
+    <div class="menu">
+
+        <button class="menu-button" onclick="openPage('map')">
+            <span class="menu-icon">🗺️</span>
+            <span class="menu-name">نقشه جهان</span>
+            <div class="menu-description">
+                جهان و کشورهای دیگر
+            </div>
+        </button>
+
+        <button class="menu-button" onclick="openPage('shop')">
+            <span class="menu-icon">🛒</span>
+            <span class="menu-name">فروشگاه</span>
+            <div class="menu-description">
+                تجهیزات و ارتقا
+            </div>
+        </button>
+
+        <button class="menu-button" onclick="openPage('country')">
+            <span class="menu-icon">📊</span>
+            <span class="menu-name">وضعیت کشور</span>
+            <div class="menu-description">
+                اقتصاد و ارتش
+            </div>
+        </button>
+
+        <button class="menu-button" onclick="openPage('alliances')">
+            <span class="menu-icon">🤝</span>
+            <span class="menu-name">اتحاد</span>
+            <div class="menu-description">
+                دیپلماسی و پیمان‌ها
+            </div>
+        </button>
+
     </div>
 
 </div>
 
+
+<!-- MAP -->
+
+<div id="map" class="page">
+
+    <button class="back" onclick="closePage()">← بازگشت</button>
+
+    <div class="command-header">
+        <h2>🗺️ نقشه جهان</h2>
+        <p style="color:#748077">
+            نقشه استراتژیک جهان
+        </p>
+    </div>
+
+    <div class="stat">
+        🌍 نقشه تعاملی در نسخه بعدی فعال می‌شود.
+    </div>
+
+</div>
+
+
+<!-- SHOP -->
+
+<div id="shop" class="page">
+
+    <button class="back" onclick="closePage()">← بازگشت</button>
+
+    <div class="command-header">
+        <h2>🛒 فروشگاه</h2>
+        <p style="color:#748077">
+            تجهیزات و ارتقاهای کشور
+        </p>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            🏭
+            <div class="stat-value">ارتقای صنعت</div>
+        </div>
+
+        <div class="stat">
+            ⚔️
+            <div class="stat-value">تجهیزات نظامی</div>
+        </div>
+
+        <div class="stat">
+            ⛽
+            <div class="stat-value">منابع</div>
+        </div>
+
+        <div class="stat">
+            🛡️
+            <div class="stat-value">دفاع</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- COUNTRY STATUS -->
+
+<div id="country" class="page">
+
+    <button class="back" onclick="closePage()">← بازگشت</button>
+
+    <div class="command-header">
+        <h2>📊 وضعیت کشور</h2>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            💰
+            <div class="stat-label">اقتصاد</div>
+            <div class="stat-value">متعادل</div>
+        </div>
+
+        <div class="stat">
+            🏭
+            <div class="stat-label">صنعت</div>
+            <div class="stat-value">100</div>
+        </div>
+
+        <div class="stat">
+            ⚔️
+            <div class="stat-label">ارتش</div>
+            <div class="stat-value">100</div>
+        </div>
+
+        <div class="stat">
+            😊
+            <div class="stat-label">رضایت</div>
+            <div class="stat-value">75%</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ALLIANCES -->
+
+<div id="alliances" class="page">
+
+    <button class="back" onclick="closePage()">← بازگشت</button>
+
+    <div class="command-header">
+
+        <h2>🤝 اتحاد</h2>
+
+        <p style="color:#748077">
+            مدیریت روابط و پیمان‌های بین کشورها
+        </p>
+
+    </div>
+
+    <div class="stat">
+        🤝 هنوز هیچ اتحادی تشکیل نشده است.
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-flag" id="modalFlag">🇮🇷</div>
+
+        <h2 id="modalName">ایران</h2>
+
+        <p>
+            آیا می‌خواهید فرماندهی این کشور را بر عهده بگیرید؟
+        </p>
+
+        <button class="confirm" onclick="confirmCountry()">
+            ⚔️ شروع فرماندهی
+        </button>
+
+        <button class="cancel" onclick="closeModal()">
+            بازگشت
+        </button>
+
+    </div>
+
+</div>
+
+
 <script>
-    function selectCountry(country) {
-        alert("شما " + country + " را انتخاب کردید!");
-    }
+
+/* =========================
+   COUNTRIES
+========================= */
+
+const countries = [
+
+["🇦🇫","افغانستان"],
+["🇦🇱","آلبانی"],
+["🇩🇿","الجزایر"],
+["🇦🇷","آرژانتین"],
+["🇦🇲","ارمنستان"],
+["🇦🇺","استرالیا"],
+["🇦🇹","اتریش"],
+["🇦🇿","آذربایجان"],
+["🇧🇭","بحرین"],
+["🇧🇩","بنگلادش"],
+["🇧🇾","بلاروس"],
+["🇧🇪","بلژیک"],
+["🇧🇴","بولیوی"],
+["🇧🇦","بوسنی و هرزگوین"],
+["🇧🇷","برزیل"],
+["🇧🇬","بلغارستان"],
+["🇨🇦","کانادا"],
+["🇨🇱","شیلی"],
+["🇨🇳","چین"],
+["🇨🇴","کلمبیا"],
+["🇭🇷","کرواسی"],
+["🇨🇺","کوبا"],
+["🇨🇾","قبرس"],
+["🇨🇿","چک"],
+["🇩🇰","دانمارک"],
+["🇪🇨","اکوادور"],
+["🇪🇬","مصر"],
+["🇪🇪","استونی"],
+["🇪🇹","اتیوپی"],
+["🇫🇮","فنلاند"],
+["🇫🇷","فرانسه"],
+["🇬🇪","گرجستان"],
+["🇩🇪","آلمان"],
+["🇬🇷","یونان"],
+["🇭🇺","مجارستان"],
+["🇮🇸","ایسلند"],
+["🇮🇳","هند"],
+["🇮🇩","اندونزی"],
+["🇮🇷","ایران"],
+["🇮🇶","عراق"],
+["🇮🇪","ایرلند"],
+["🇮🇹","ایتالیا"],
+["🇯🇵","ژاپن"],
+["🇯🇴","اردن"],
+["🇰🇿","قزاقستان"],
+["🇰🇪","کنیا"],
+["🇰🇼","کویت"],
+["🇱🇻","لتونی"],
+["🇱🇧","لبنان"],
+["🇱🇾","لیبی"],
+["🇱🇹","لیتوانی"],
+["🇱🇺","لوکزامبورگ"],
+["🇲🇾","مالزی"],
+["🇲🇽","مکزیک"],
+["🇲🇩","مولداوی"],
+["🇲🇳","مغولستان"],
+["🇲🇪","مونته‌نگرو"],
+["🇲🇦","مراکش"],
+["🇳🇵","نپال"],
+["🇳🇱","هلند"],
+["🇳🇿","نیوزیلند"],
+["🇳🇬","نیجریه"],
+["🇰🇵","کره شمالی"],
+["🇳🇴","نروژ"],
+["🇴🇲","عمان"],
+["🇵🇰","پاکستان"],
+["🇵🇦","پاناما"],
+["🇵🇪","پرو"],
+["🇵🇭","فیلیپین"],
+["🇵🇱","لهستان"],
+["🇵🇹","پرتغال"],
+["🇶🇦","قطر"],
+["🇷🇴","رومانی"],
+["🇷🇺","روسیه"],
+["🇸🇦","عربستان سعودی"],
+["🇷🇸","صربستان"],
+["🇸🇬","سنگاپور"],
+["🇸🇰","اسلواکی"],
+["🇸🇮","اسلوونی"],
+["🇿🇦","آفریقای جنوبی"],
+["🇰🇷","کره جنوبی"],
+["🇪🇸","اسپانیا"],
+["🇱🇰","سریلانکا"],
+["🇸🇩","سودان"],
+["🇸🇪","سوئد"],
+["🇨🇭","سوئیس"],
+["🇸🇾","سوریه"],
+["🇹🇼","تایوان"],
+["🇹🇯","تاجیکستان"],
+["🇹🇭","تایلند"],
+["🇹🇳","تونس"],
+["🇹🇷","ترکیه"],
+["🇹🇲","ترکمنستان"],
+["🇺🇦","اوکراین"],
+["🇦🇪","امارات"],
+["🇬🇧","بریتانیا"],
+["🇺🇸","آمریکا"],
+["🇺🇾","اروگوئه"],
+["🇺🇿","ازبکستان"],
+["🇻🇪","ونزوئلا"],
+["🇻🇳","ویتنام"],
+["🇾🇪","یمن"],
+["🇿🇲","زامبیا"],
+["🇿🇼","زیمبابوه"]
+
+];
+
+let selectedCountry = "";
+let selectedFlag = "";
+
+
+/* =========================
+   SHOW COUNTRIES
+========================= */
+
+function showCountries(list = countries) {
+
+    const box = document.getElementById("countries");
+
+    box.innerHTML = "";
+
+    document.getElementById("countryCount").innerText =
+        list.length + " کشور";
+
+    list.forEach(country => {
+
+        const card = document.createElement("div");
+
+        card.className = "country";
+
+        card.innerHTML = `
+            <div class="flag">${country[0]}</div>
+            <div class="country-name">${country[1]}</div>
+            <div class="country-info">
+                AVAILABLE COMMAND
+            </div>
+        `;
+
+        card.onclick = function() {
+            openCountry(country[1], country[0]);
+        };
+
+        box.appendChild(card);
+
+    });
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchCountries() {
+
+    const text =
+        document.getElementById("search").value.trim();
+
+    const filtered = countries.filter(country =>
+        country[1].includes(text)
+    );
+
+    showCountries(filtered);
+}
+
+
+/* =========================
+   SELECT COUNTRY
+========================= */
+
+function openCountry(name, flag) {
+
+    selectedCountry = name;
+    selectedFlag = flag;
+
+    document.getElementById("modalName").innerText = name;
+    document.getElementById("modalFlag").innerText = flag;
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+
+function closeModal() {
+
+    document.getElementById("modal").style.display = "none";
+}
+
+
+function confirmCountry() {
+
+    document.getElementById("selectedCountry").innerText =
+        selectedCountry;
+
+    document.getElementById("selectedFlag").innerText =
+        selectedFlag;
+
+    document.getElementById("selection").style.display = "none";
+
+    document.getElementById("command").style.display = "block";
+
+    closeModal();
+
+}
+
+
+/* =========================
+   COMMAND PAGES
+========================= */
+
+function openPage(page) {
+
+    document.getElementById("command").style.display = "none";
+
+    document.querySelectorAll(".page").forEach(p => {
+        p.classList.remove("active");
+    });
+
+    document.getElementById(page).classList.add("active");
+}
+
+
+function closePage() {
+
+    document.querySelectorAll(".page").forEach(p => {
+        p.classList.remove("active");
+    });
+
+    document.getElementById("command").style.display = "block";
+}
+
+
+function backToCountries() {
+
+    document.getElementById("command").style.display = "none";
+
+    document.getElementById("selection").style.display = "block";
+
+}
+
+
+/* START */
+
+showCountries();
+
 </script>
 
 </body>
