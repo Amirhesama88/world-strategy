@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Strategy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: white;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .header p {
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+
+        .countries {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .country {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 16px;
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .country:active {
+            transform: scale(0.96);
+        }
+
+        .flag {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🌍 World Strategy</h1>
+        <p>کشور خود را انتخاب کنید</p>
+    </div>
+
+    <div class="countries">
+
+        <div class="country" onclick="selectCountry('ایران')">
+            <span class="flag">🇮🇷</span>
+            ایران
+        </div>
+
+        <div class="country" onclick="selectCountry('چین')">
+            <span class="flag">🇨🇳</span>
+            چین
+        </div>
+
+        <div class="country" onclick="selectCountry('فنلاند')">
+            <span class="flag">🇫🇮</span>
+            فنلاند
+        </div>
+
+        <div class="country" onclick="selectCountry('آلمان')">
+            <span class="flag">🇩🇪</span>
+            آلمان
+        </div>
+
+        <div class="country" onclick="selectCountry('فرانسه')">
+            <span class="flag">🇫🇷</span>
+            فرانسه
+        </div>
+
+        <div class="country" onclick="selectCountry('بریتانیا')">
+            <span class="flag">🇬🇧</span>
+            بریتانیا
+        </div>
+
+    </div>
+
+    <div class="footer">
+        نسخه آزمایشی بازی
+    </div>
+
+</div>
+
+<script>
+    function selectCountry(country) {
+        alert("شما " + country + " را انتخاب کردید!");
+    }
+</script>
+
+</body>
+</html>
